@@ -4,6 +4,8 @@
 #include <fcntl.h>
 #include <stdio.h>
 
+#define  _GNU_SOURCE
+
 /**
  * main - entry point
  * @ac: args counter
