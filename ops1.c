@@ -54,7 +54,7 @@ void del_node_beg(stack_t **stack, unsigned int line_num)
 		free(tmp);
 		return;
 	}
-	fprint(stderr, "L%u: can't pop an empty stack\n", line_num);
+	fprintf(stderr, "L%u: can't pop an empty stack\n", line_num);
 	free(tmp);
 	exit(EXIT_FAILURE);
 }
