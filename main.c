@@ -22,7 +22,6 @@ int main(int ac, char **argv)
 	char *cmd_buffer = NULL;
 	stack_t *stack = NULL;
 	size_t buffer_size = 0;
-	ssize_t readline;
 
 	if (ac != 2)
 	{
@@ -38,7 +37,7 @@ int main(int ac, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	while ((readline = getline(&cmd_buffer, &buffer_size, fd)) != -1)
+	while (fgets(cmd_buffer, buffer_size, fd) != NULL)
 	{
 		opcodes_arr = tokenize_line(cmd_buffer);
 		execute(&stack, opcodes_arr, line_n);
