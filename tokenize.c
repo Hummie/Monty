@@ -11,12 +11,22 @@
 
 char **tokenize_line(char *command)
 {
-	char *command_cpy = NULL, *token_ptr = NULL;
+	char *command_cpy, *token_ptr = NULL;
 	char **opcode_arr = NULL;
 	size_t i = 0, j = 0, num_of_tokens = 0;
 	const char *delim = " \n\t";
 
-	strcpy(command_cpy, command);
+	if (!command)
+	{
+		return (NULL);
+	}
+	command_cpy = malloc(strlen(command) + 1);
+	if (!command_cpy)
+	{
+		fprintf(stderr, "malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	command_cpy = _strdup(command);
 	token_ptr = strtok(command_cpy, delim);
 	while (token_ptr != NULL) /* get num of tokens for correct malloc*/
 	{
@@ -36,7 +46,7 @@ char **tokenize_line(char *command)
 		token_ptr = strtok(command, delim);
 		while (token_ptr)
 		{
-			strcpy(opcode_arr[i], token_ptr);
+			opcode_arr[i] = _strdup(token_ptr);
 			if (opcode_arr[i] == NULL)
 			{
 				while (j < i)
@@ -51,4 +61,24 @@ char **tokenize_line(char *command)
 		return (opcode_arr);
 	}
 	return NULL;
+}
+
+/**
+ * _strdup - duplicates a string to new mem
+ * @src: source string
+ * Return: pointer to new string
+*/
+char *_strdup(char *src)
+{
+	char *dest = NULL;
+	unsigned int len = 0;
+
+	if (!src)
+		return (NULL);
+	len = strlen(src) + 1;
+	dest = malloc(sizeof(char) * len);
+	if (!dest)
+		return (NULL);
+	dest = memcpy(dest, src, len);
+	return (dest);
 }

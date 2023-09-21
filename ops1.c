@@ -65,13 +65,13 @@ void del_node_beg(stack_t **stack, unsigned int line_num)
  * Return: void
  */
 
-void print_int(stack_t *stack)
+void print_int(stack_t **stack)
 {
-	if (!stack) /* runs if the stack is empty */
+	if (!*stack) /* runs if the stack is empty */
 	{
 		return;
 	}
-	fprintf(stdout, "%d\n", stack->n);
+	fprintf(stdout, "%d\n", (*stack)->n);
 }
 
 /**
@@ -80,16 +80,16 @@ void print_int(stack_t *stack)
  * Return: void
 */
 
-void print_list(stack_t *stack)
+void print_list(stack_t **stack)
 {
-	if (!stack)
+	if (!*stack)
 	{
 		return;
 	}
-	while (stack->next)
+	while ((*stack)->next)
 	{
-		fprintf(stdout, "%d\n", stack->n);
-		stack = stack->next;
+		fprintf(stdout, "%d\n", (*stack)->n);
+		*stack = (*stack)->next;
 	}
-	fprintf(stdout, "%d\n", stack->n);
+	fprintf(stdout, "%d\n", (*stack)->n);
 }

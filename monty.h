@@ -37,13 +37,14 @@ typedef struct instruction_s
 extern char **opcodes_arr;
 void add_node_beg(stack_t **stack, int n);
 void del_node_beg(stack_t **stack, unsigned int line_num);
-void print_list(stack_t *stack);
-void print_int(stack_t *stack);
+void print_list(stack_t **stack);
+void print_int(stack_t **stack);
 void pint(stack_t **stack, unsigned int line_num);
 void push(stack_t **stack, unsigned int line_num);
 void pall(stack_t **stack, unsigned int line_num);
 void pop(stack_t **stack, unsigned int line_num);
 char **tokenize_line(char *command);
+char *_strdup(char *src);
 void execute(stack_t **stack, char **ops_arr, unsigned int line_num);
 #endif /* MONTY_H */
 

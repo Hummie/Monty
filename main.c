@@ -21,7 +21,9 @@ int main(int ac, char **argv)
 	FILE *fd;
 	char *cmd_buffer = NULL;
 	stack_t *stack = NULL;
-	size_t buffer_size = 0;
+	size_t buffer_size = 1024;
+
+	(void) stack;
 
 	if (ac != 2)
 	{
@@ -37,7 +39,15 @@ int main(int ac, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	while (fgets(cmd_buffer, buffer_size, fd) != NULL)
+	cmd_buffer = malloc(buffer_size);
+	if (!cmd_buffer)
+	{
+		fprintf(stderr, "malloc failed\n");
+		fclose(fd);
+		exit(EXIT_FAILURE);
+	}
+
+	while (fgets(cmd_buffer, buffer_size, fd))
 	{
 		opcodes_arr = tokenize_line(cmd_buffer);
 		execute(&stack, opcodes_arr, line_n);

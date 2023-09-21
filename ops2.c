@@ -32,7 +32,7 @@ void push(stack_t **stack, unsigned int line_num)
 void pall(stack_t **stack, unsigned int line_num)
 {
 	(void)line_num;
-	print_list(*stack);
+	print_list(stack);
 }
 
 /**
@@ -44,7 +44,7 @@ void pall(stack_t **stack, unsigned int line_num)
 void pint(stack_t **stack, unsigned int line_num)
 {
 	(void)line_num;
-	print_int(*stack);
+	print_int(stack);
 }
 
 /**
@@ -78,7 +78,7 @@ void execute(stack_t **stack, char **ops_arr, unsigned int line_num)
 		{"pop", pop},
 		{NULL, NULL}
 	};
-
+	
 	while (operate[i].opcode)
 	{
 		if ((strcmp(ops_arr[0], operate[i].opcode) == 0))
