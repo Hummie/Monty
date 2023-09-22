@@ -31,8 +31,6 @@ void add_node_beg(stack_t **stack, int n)
 	new_node->prev = NULL;
 	new_node->next = NULL;
 	*stack = new_node;
-
-	free(new_node);
 }
 
 /**

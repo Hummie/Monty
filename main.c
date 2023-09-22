@@ -37,11 +37,10 @@ int main(int ac, char **argv)
 	while (fgets(cmd_buffer, buffer_size, fd))
 	{
 		opcodes_arr = tokenize_line(cmd_buffer);
-		free(cmd_buffer);
+		/*free(cmd_buffer);*/
 		execute(&stack, opcodes_arr, line_n);
 		for (i = 0; opcodes_arr[i] != NULL; i++)
 			free(opcodes_arr[i]);
-		free(opcodes_arr);
 		line_n++; }
 	free(cmd_buffer);
 	free(opcodes_arr);
