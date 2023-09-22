@@ -46,5 +46,6 @@ void pop(stack_t **stack, unsigned int line_num);
 char **tokenize_line(char *command);
 char *_strdup(char *src);
 void execute(stack_t **stack, char **ops_arr, unsigned int line_num);
+void nop(stack_t **stack, unsigned int line_num);
 #endif /* MONTY_H */
 

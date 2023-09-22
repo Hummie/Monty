@@ -76,6 +76,7 @@ void execute(stack_t **stack, char **ops_arr, unsigned int line_num)
 		{"pall", pall},
 		{"pint", pint},
 		{"pop", pop},
+		{"nop", nop},
 		{NULL, NULL}
 	};
 	
