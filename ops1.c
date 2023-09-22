@@ -93,3 +93,14 @@ void print_list(stack_t **stack)
 	}
 	fprintf(stdout, "%d\n", (*stack)->n);
 }
+/**
+ * nop - does literally nothing
+ * @stack: pointer to the head node pointer of stack
+ * @line_num: the line number
+ * Return: Nothing.
+ */
+void nop(stack_t **stack, unsigned int line_num)
+{
+	(void)stack;
+	(void)line_num;
+}
