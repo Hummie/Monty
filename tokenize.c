@@ -85,6 +85,7 @@ void handle_ac(int ac)
 /**
  * handle_fd - handles file open error
  * @fd: file descriptor
+ * @filename: filename
  * Return: void
 */
 void handle_fd(FILE *fd, char *filename)
