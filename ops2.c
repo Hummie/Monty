@@ -79,7 +79,7 @@ void execute(stack_t **stack, char **ops_arr, unsigned int line_num)
 		{"nop", nop},
 		{NULL, NULL}
 	};
-	
+
 	while (operate[i].opcode)
 	{
 		if ((strcmp(ops_arr[0], operate[i].opcode) == 0))

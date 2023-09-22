@@ -18,11 +18,6 @@ char **tokenize_line(char *command)
 
 	if (!command)
 		return (NULL);
-	command_cpy = malloc(strlen(command) + 1);
-	if (!command_cpy)
-	{
-		fprintf(stderr, "malloc failed\n");
-		exit(EXIT_FAILURE); }
 	command_cpy = _strdup(command);
 	token_ptr = strtok(command_cpy, delim);
 	while (token_ptr != NULL) /* get num of tokens for correct malloc*/
@@ -71,4 +66,32 @@ char *_strdup(char *src)
 		return (NULL);
 	dest = memcpy(dest, src, len);
 	return (dest);
+}
+
+/**
+ * handle_ac - handles ac error
+ * @ac: args counter
+ * Return: void
+*/
+void handle_ac(int ac)
+{
+	if (ac != 2)
+	{
+		fprintf(stderr, "Usage: monty file\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
+/**
+ * handle_fd - handles file open error
+ * @fd: file descriptor
+ * Return: void
+*/
+void handle_fd(FILE *fd, char *filename)
+{
+	if (!fd)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", filename);
+		exit(EXIT_FAILURE);
+	}
 }

@@ -47,5 +47,7 @@ char **tokenize_line(char *command);
 char *_strdup(char *src);
 void execute(stack_t **stack, char **ops_arr, unsigned int line_num);
 void nop(stack_t **stack, unsigned int line_num);
+void handle_ac(int ac);
+void handle_fd(FILE *fd, char *filename);
 #endif /* MONTY_H */
 

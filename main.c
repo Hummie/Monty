@@ -21,38 +21,27 @@ int main(int ac, char **argv)
 	FILE *fd;
 	char *cmd_buffer = NULL;
 	stack_t *stack = NULL;
-	size_t buffer_size = 1024;
+	size_t buffer_size = 100;
+	int i;
 
-	(void) stack;
-
-	if (ac != 2)
-	{
-		fprintf(stderr, "Usage: monty file\n");
-		free(cmd_buffer);
-		exit(EXIT_FAILURE);
-	}
-
+	handle_ac(ac);
 	fd = fopen(argv[1], "r");
-	if (!fd)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
-
+	handle_fd(fd, argv[1]);
 	cmd_buffer = malloc(buffer_size);
 	if (!cmd_buffer)
 	{
 		fprintf(stderr, "malloc failed\n");
 		fclose(fd);
-		exit(EXIT_FAILURE);
-	}
-
+		exit(EXIT_FAILURE); }
 	while (fgets(cmd_buffer, buffer_size, fd))
 	{
 		opcodes_arr = tokenize_line(cmd_buffer);
+		free(cmd_buffer);
 		execute(&stack, opcodes_arr, line_n);
-		line_n++;
-	}
+		for (i = 0; opcodes_arr[i] != NULL; i++)
+			free(opcodes_arr[i]);
+		free(opcodes_arr);
+		line_n++; }
 	free(cmd_buffer);
 	free(opcodes_arr);
 	fclose(fd);
