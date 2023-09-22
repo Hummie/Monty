@@ -11,6 +11,7 @@ void add(stack_t **stack, unsigned int line_num)
 	if (!(*stack)->next)
 	{
 		fprintf(stderr, "L%u: can't add, stack too short\n", line_num);
+		return;
 	}
 	sumup(stack);
 }
@@ -23,6 +24,12 @@ void add(stack_t **stack, unsigned int line_num)
 void sumup(stack_t **stack)
 {
 	int sum = 0;
+
+	if (!(*stack) || !(*stack)->next)
+	{
+		fprintf(stderr, "Error: can't add, stack too short\n");
+		return;
+	}
 
 	sum = (*stack)->n + (*stack)->next->n;
 	add_node_beg(stack, sum);

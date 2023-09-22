@@ -18,7 +18,13 @@ char **tokenize_line(char *command)
 
 	if (!command)
 		return (NULL);
+
 	command_cpy = _strdup(command);
+	if (!command_cpy)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
 	token_ptr = strtok(command_cpy, delim);
 	while (token_ptr != NULL) /* get num of tokens for correct malloc*/
 	{
@@ -30,7 +36,8 @@ char **tokenize_line(char *command)
 		opcode_arr = malloc(sizeof(char *) * (num_of_tokens + 1));
 		if (!opcode_arr)
 		{	perror("malloc");
-			exit(EXIT_FAILURE); }
+			exit(EXIT_FAILURE);
+		}
 		token_ptr = strtok(command, delim);
 		while (token_ptr)
 		{	opcode_arr[i] = _strdup(token_ptr);
@@ -38,13 +45,17 @@ char **tokenize_line(char *command)
 			{
 				while (j < i)
 					free(opcode_arr[j]), j++;
-				return (NULL); }
+				free(opcode_arr);
+				perror("malloc");
+				exit(EXIT_FAILURE);
+			}
+
 			i++;
 			token_ptr = strtok(NULL, delim);
 		}
 		opcode_arr[i] = NULL;
-		return (opcode_arr);
-	} return NULL;
+	}
+	return (opcode_arr);
 }
 
 /**
@@ -62,8 +73,11 @@ char *_strdup(char *src)
 	len = strlen(src) + 1;
 	dest = malloc(sizeof(char) * len);
 	if (!dest)
-		return (NULL);
-	dest = memcpy(dest, src, len);
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
+	memcpy(dest, src, len);
 	return (dest);
 }
 

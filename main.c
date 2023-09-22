@@ -26,6 +26,11 @@ int main(int ac, char **argv)
 
 	handle_ac(ac);
 	fd = fopen(argv[1], "r");
+	if (fd == NULL) 
+	{
+        fprintf(stderr, "Error: Can't open file <file> %s\n", argv[1]);
+        exit(EXIT_FAILURE);
+	}
 	handle_fd(fd, argv[1]);
 	cmd_buffer = malloc(buffer_size);
 	if (!cmd_buffer)
@@ -41,7 +46,8 @@ int main(int ac, char **argv)
 		execute(&stack, opcodes_arr, line_n);
 		for (i = 0; opcodes_arr[i] != NULL; i++)
 			free(opcodes_arr[i]);
-		line_n++; }
+		line_n++; 
+	}
 	free(cmd_buffer);
 	free(opcodes_arr);
 	fclose(fd);

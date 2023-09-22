@@ -18,18 +18,13 @@ void add_node_beg(stack_t **stack, int n)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	if (*stack)
-	{
-		new_node->n = n;
-		new_node->prev = NULL;
-		new_node->next = *stack;
-		new_node->next->prev = new_node;
-		*stack = new_node;
-		return;
-	}
 	new_node->n = n;
 	new_node->prev = NULL;
 	new_node->next = NULL;
+
+	if (*stack)
+		(*stack)->prev = new_node;
+	
 	*stack = new_node;
 }
 
@@ -81,16 +76,18 @@ void print_int(stack_t **stack)
 
 void print_list(stack_t **stack)
 {
-	if (!*stack)
+	stack_t *current = *stack;
+
+	if (!current)
 	{
 		return;
 	}
 	while ((*stack)->next)
 	{
-		fprintf(stdout, "%d\n", (*stack)->n);
-		*stack = (*stack)->next;
+		fprintf(stdout, "%d\n", current->n);
+		current = current->next;
 	}
-	fprintf(stdout, "%d\n", (*stack)->n);
+	fprintf(stdout, "%d\n", current->n);
 }
 /**
  * nop - does literally nothing
