@@ -32,7 +32,8 @@ int main(int ac, char **argv)
 	{
 		fprintf(stderr, "malloc failed\n");
 		fclose(fd);
-		exit(EXIT_FAILURE); }
+		exit(EXIT_FAILURE);
+	}
 	while (fgets(cmd_buffer, buffer_size, fd))
 	{
 		opcodes_arr = tokenize_line(cmd_buffer);

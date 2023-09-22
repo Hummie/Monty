@@ -43,7 +43,11 @@ void pall(stack_t **stack, unsigned int line_num)
 */
 void pint(stack_t **stack, unsigned int line_num)
 {
-	(void)line_num;
+	if (!*stack)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_num);
+		exit(EXIT_FAILURE);
+	}
 	print_int(stack);
 }
 

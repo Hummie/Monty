@@ -31,6 +31,8 @@ void add_node_beg(stack_t **stack, int n)
 	new_node->prev = NULL;
 	new_node->next = NULL;
 	*stack = new_node;
+
+	free(new_node);
 }
 
 /**
@@ -44,18 +46,17 @@ void del_node_beg(stack_t **stack, unsigned int line_num)
 {
 	stack_t *tmp;
 
-	tmp = *stack;
+	tmp = (*stack);
 
 	if (tmp)
 	{
-		*stack = tmp->next;
-		if (*stack)
+		(*stack) = tmp->next;
+		if ((*stack))
 			(*stack)->prev = NULL;
 		free(tmp);
 		return;
 	}
 	fprintf(stderr, "L%u: can't pop an empty stack\n", line_num);
-	free(tmp);
 	exit(EXIT_FAILURE);
 }
 

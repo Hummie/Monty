@@ -1,6 +1,6 @@
+push 20
+push 100
+push 52
 push 1
-push 2
-push 3
-pall
-add
+push 98
 pall

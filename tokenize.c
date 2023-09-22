@@ -38,7 +38,6 @@ char **tokenize_line(char *command)
 			{
 				while (j < i)
 					free(opcode_arr[j]), j++;
-				free(opcode_arr);
 				return (NULL); }
 			i++;
 			token_ptr = strtok(NULL, delim);
