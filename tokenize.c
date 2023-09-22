@@ -17,50 +17,40 @@ char **tokenize_line(char *command)
 	const char *delim = " \n\t";
 
 	if (!command)
-	{
 		return (NULL);
-	}
 	command_cpy = malloc(strlen(command) + 1);
 	if (!command_cpy)
 	{
 		fprintf(stderr, "malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+		exit(EXIT_FAILURE); }
 	command_cpy = _strdup(command);
 	token_ptr = strtok(command_cpy, delim);
 	while (token_ptr != NULL) /* get num of tokens for correct malloc*/
 	{
 		num_of_tokens++;
-		token_ptr = strtok(NULL, delim);
-	}
+		token_ptr = strtok(NULL, delim); }
 	free(command_cpy);
-
 	if (num_of_tokens != 0)
 	{
 		opcode_arr = malloc(sizeof(char *) * (num_of_tokens + 1));
 		if (!opcode_arr)
-		{
-			perror("malloc");
-			exit(EXIT_FAILURE);	
-		}
+		{	perror("malloc");
+			exit(EXIT_FAILURE); }
 		token_ptr = strtok(command, delim);
 		while (token_ptr)
-		{
-			opcode_arr[i] = _strdup(token_ptr);
+		{	opcode_arr[i] = _strdup(token_ptr);
 			if (opcode_arr[i] == NULL)
 			{
 				while (j < i)
 					free(opcode_arr[j]), j++;
 				free(opcode_arr);
-				return (NULL);
-			}
+				return (NULL); }
 			i++;
 			token_ptr = strtok(NULL, delim);
 		}
 		opcode_arr[i] = NULL;
 		return (opcode_arr);
-	}
-	return NULL;
+	} return NULL;
 }
 
 /**
