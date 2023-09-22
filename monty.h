@@ -49,5 +49,7 @@ void execute(stack_t **stack, char **ops_arr, unsigned int line_num);
 void nop(stack_t **stack, unsigned int line_num);
 void handle_ac(int ac);
 void handle_fd(FILE *fd, char *filename);
+void sumup(stack_t **stack);
+void add(stack_t **stack, unsigned int line_num);
 #endif /* MONTY_H */
 
